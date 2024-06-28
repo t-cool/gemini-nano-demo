@@ -17,7 +17,8 @@ async function play_nano(){
                 const result = await session.prompt(contextPrompt);
     
                 conversationHistory.push({ role: "assistant", content: result });
-                console.log(result);
+                console.log(`YOU: ${userPrompt}`);
+                console.log(`NANO: ${result}`);
             }
         }
     })();
