@@ -26,15 +26,17 @@ const getGeminiResponse = (function () {
     };
 })();
 
-// 使用例
-// getGeminiResponse("奈良で有名な寺院は？").then(finalResponse => {
-//     // => "興福寺、東大寺、唐招提寺"
-// });
+/* 使用例
+getGeminiResponse("奈良で有名な寺院は？").then(finalResponse => {
+    // => "興福寺、東大寺、唐招提寺"
+});
 
-// getGeminiResponse("このなかで一番有名なのは？").then(finalResponse => {
-//     // => "東大寺"
-// });
+getGeminiResponse("このなかで一番有名なのは？").then(finalResponse => {
+    // => "東大寺"
+});
 
-// getGeminiResponse("理由は何ですか？").then(finalResponse => {
-//     // => "759年からの歴史があるからです"
-// });
+getGeminiResponse("理由は何ですか？").then(finalResponse => {
+    // => "759年からの歴史があるからです"
+});
+
+*/
