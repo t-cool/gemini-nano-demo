@@ -1,8 +1,8 @@
-const getGeminiResponse = (function () {
+const GeminiSession = (function () {
     let conversationHistory = [];
     let session = null;
 
-    return async function (userPrompt) {
+    async function createSession() {
         if (!session) {
             const canCreate = await window.ai.canCreateTextSession();
 
@@ -13,6 +13,10 @@ const getGeminiResponse = (function () {
 
             session = await window.ai.createTextSession();
         }
+    }
+
+    async function getGeminiResponse(userPrompt) {
+        await createSession();
 
         conversationHistory.push({ role: "user", content: userPrompt });
 
@@ -23,20 +27,35 @@ const getGeminiResponse = (function () {
         conversationHistory.push({ role: "assistant", content: result });
         console.log(`YOU: ${userPrompt}`);
         console.log(`NANO: ${result}`);
+
+        // 最後の返答を返す
+        return result;
+    }
+
+    function getConversationHistory() {
+        // ユーザーとアシスタントのペアを二次元配列に変換
+        let historyArray = [];
+        for (let i = 0; i < conversationHistory.length; i += 2) {
+            if (conversationHistory[i + 1]) {
+                historyArray.push([conversationHistory[i].content, conversationHistory[i + 1].content]);
+            }
+        }
+        return historyArray;
+    }
+
+    return {
+        getGeminiResponse,
+        getConversationHistory
     };
 })();
 
 /* 使用例
-getGeminiResponse("奈良で有名な寺院は？").then(finalResponse => {
-    // => "興福寺、東大寺、唐招提寺"
-});
+GeminiSession.getGeminiResponse("奈良で有名な寺院は？");
 
-getGeminiResponse("このなかで一番有名なのは？").then(finalResponse => {
-    // => "東大寺"
-});
+GeminiSession.getGeminiResponse("このなかで一番有名なのは？");
 
-getGeminiResponse("理由は何ですか？").then(finalResponse => {
-    // => "759年からの歴史があるからです"
-});
+GeminiSession.getGeminiResponse("理由は何でfすか？");
 
+const history = GeminiSession.getConversationHistory();
+console.log(history);
 */
