@@ -2,7 +2,7 @@ const GeminiSession = (function () {
     let conversationHistory = [];
     let session = null;
 
-    async function createSession() {
+    async function initSession() {
         if (!session) {
             const canCreate = await window.ai.canCreateTextSession();
 
@@ -17,7 +17,7 @@ const GeminiSession = (function () {
 
     async function getGeminiResponse(userPrompt) {
         if (!session) {
-            console.log("Session has not been initialized. Please call initSession first.");
+            console.log("Session has not been initialized.");
             return;
         }
 
@@ -46,13 +46,11 @@ const GeminiSession = (function () {
     }
 
     return {
-        initSession: createSession,
+        initSession,
         getGeminiResponse,
         getConversationHistory
     };
 })();
-
-/* 使用例
 
 /* 使用例
 GeminiSession.initSession();
