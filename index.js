@@ -71,3 +71,18 @@ const GeminiSession = (function () {
 //     console.log(JSON.stringify(history, null, 2));
 // }, 1000);
 // */
+
+
+// GeminiSession.getGeminiResponse("これらの中で一番歴史が長いのはどれですか？");
+// VM2982:31 日本語で返して。今回の質問:これらの中で一番歴史が長いのはどれですか？, これまでのやり取り: [
+//   [
+//     {
+//       "role": "user",
+//       "content": "奈良で有名な寺院は？"
+//     },
+//     {
+//       "role": "assistant",
+//       "content": " 奈良県には多くの有名な寺院があります。以下はほんの一例です。\n- 奈良東大寺\n- 奈良薬医薬仏教専門職大学\n- 奈良法性寺\n- 奈良紫禁"
+//     }
+//   ]
+// ]
