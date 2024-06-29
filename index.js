@@ -2,7 +2,7 @@ const GeminiSession = (function () {
     let conversationHistory = [];
     let session = null;
 
-    async function initSession() {
+    async function createSession() {
         if (!session) {
             const canCreate = await window.ai.canCreateTextSession();
 
@@ -17,15 +17,17 @@ const GeminiSession = (function () {
 
     async function getGeminiResponse(userPrompt) {
         if (!session) {
-            console.log("Session has not been initialized.");
+            console.log("Session has not been initialized. Please call initSession first.");
             return;
         }
 
         // ユーザのプロンプトを保存
         let userEntry = { role: "user", content: userPrompt };
         
-        // 文脈を保持したプロンプトを作成
-        const contextPrompt = conversationHistory.flatMap(pair => [pair[0].content, pair[1].content]).join('\n') + '\n' + userPrompt;
+        let contextPrompt = conversationHistory.flatMap(pair => [pair[0].content, pair[1].content]).join('\n') + '\n' + userPrompt;
+
+        console.log(contextPrompt);
+
         const result = await session.prompt(contextPrompt);
 
         // アシスタントの応答を保存
@@ -46,11 +48,13 @@ const GeminiSession = (function () {
     }
 
     return {
-        initSession,
+        initSession: createSession,
         getGeminiResponse,
         getConversationHistory
     };
 })();
+
+/* 使用例
 
 /* 使用例
 GeminiSession.initSession();
