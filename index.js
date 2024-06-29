@@ -16,7 +16,10 @@ const GeminiSession = (function () {
     }
 
     async function getGeminiResponse(userPrompt) {
-        await createSession();
+        if (!session) {
+            console.log("Session has not been initialized. Please call initSession first.");
+            return;
+        }
 
         // ユーザのプロンプトを保存
         let userEntry = { role: "user", content: userPrompt };
@@ -43,12 +46,17 @@ const GeminiSession = (function () {
     }
 
     return {
+        initSession: createSession,
         getGeminiResponse,
         getConversationHistory
     };
 })();
 
 /* 使用例
+
+/* 使用例
+GeminiSession.initSession();
+
 GeminiSession.getGeminiResponse("奈良で有名な寺院は？");
 // => "興福寺、東大寺、唐招提寺"
 
