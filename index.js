@@ -67,7 +67,7 @@ GeminiSession.getGeminiResponse("一番のおすすめは？");
 
 // 会話の記録を取得
 setTimeout(() => {
-    const history = GeminiSession.getConversationHistory();
+    const conversationHistory = GeminiSession.getConversationHistory();
     console.log(JSON.stringify(history, null, 2));
 }, 1000);
 */
